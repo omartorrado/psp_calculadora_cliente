@@ -16,11 +16,9 @@ import java.net.Socket;
  * @author otorradomiguez
  */
 public class Psp_calculadora_cliente {
+    private byte[] respuesta;
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
+       public String ejecutar(String operacion) {
         try {
             System.out.println("Creando socket cliente");
             Socket clienteSocket = new Socket();
@@ -34,7 +32,7 @@ public class Psp_calculadora_cliente {
 
             System.out.println("Enviando mensaje");
 
-            String mensaje = "10,5,division";
+            String mensaje = operacion;
             byte[] mens=new byte[30];
             byte[] bytesMensaje=mensaje.getBytes();
             for(int i=0;i<mensaje.getBytes().length;i++){
@@ -46,7 +44,7 @@ public class Psp_calculadora_cliente {
             System.out.println("Mensaje enviado");
             
             //Esto es el numero de bytes que leemos? parece que si
-            byte[] respuesta = new byte[30];
+            respuesta = new byte[30];
             //el metodo is.read() devuelve el numero de bytes leidos del stream
             int bytesLeidos=is.read(respuesta);
             
@@ -61,6 +59,7 @@ public class Psp_calculadora_cliente {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return new String(respuesta);
     }
     
 }

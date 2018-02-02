@@ -16,14 +16,14 @@ public class UI extends javax.swing.JFrame {
     String stringNumeros = "";
     String numeros1 = "";
     String numeros2 = "";
-    String operacion="";
+    String operacion = "";
     String mensajeParaServidor = "";
 
     /*
     estados: 0 primer numero, 1 segundo numero, 2 volver a operar sin darle a =
-    */
+     */
     int estadoOperacion = 0;
-    
+
     Psp_calculadora_cliente cliente;
 
     /**
@@ -31,7 +31,7 @@ public class UI extends javax.swing.JFrame {
      */
     public UI() {
         initComponents();
-        cliente=new Psp_calculadora_cliente();       
+        cliente = new Psp_calculadora_cliente();
     }
 
     /**
@@ -305,19 +305,19 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton0ActionPerformed
 
     private void jButtonSumaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSumaActionPerformed
-        // TODO add your handling code here:
+        operacion("suma");
     }//GEN-LAST:event_jButtonSumaActionPerformed
 
     private void jButtonRestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRestaActionPerformed
-        // TODO add your handling code here:
+        operacion("resta");
     }//GEN-LAST:event_jButtonRestaActionPerformed
 
     private void jButtonMultiplicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMultiplicaActionPerformed
-        // TODO add your handling code here:
+        operacion("multip");
     }//GEN-LAST:event_jButtonMultiplicaActionPerformed
 
     private void jButtonDivideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDivideActionPerformed
-        // TODO add your handling code here:
+        operacion("division");
     }//GEN-LAST:event_jButtonDivideActionPerformed
 
     /**
@@ -356,6 +356,9 @@ public class UI extends javax.swing.JFrame {
     }
 
     public void escribirNumero(int numero) {
+        if(estadoOperacion==2){
+            estadoOperacion=1;
+        }
 
         stringNumeros = stringNumeros + numero;
 
@@ -363,20 +366,33 @@ public class UI extends javax.swing.JFrame {
     }
 
     public void operacion(String op) {
+        /*
+        - Comprobar que hemos escrito algun numero
+        - Comprobar si ya hemos operado
+         */
         if (estadoOperacion == 0) {
-            numeros1 = stringNumeros;            
+            numeros1 = stringNumeros;
             stringNumeros = "";
-            estadoOperacion=1;
-        } else if(estadoOperacion==1) {
+            estadoOperacion = 2;
+            operacion = op;
+        } else if (estadoOperacion == 1) {
             numeros2 = stringNumeros;
             stringNumeros = "";
-            estadoOperacion=0;
+            estadoOperacion = 2;
+            resultado();
+            operacion = op;
         }
-        operacion=op;
+        if (estadoOperacion == 2) {
+            operacion = op;
+        }
     }
-    
-    public void resultado(){
-        mensajeParaServidor=numeros1+","+numeros2+","+operacion;
+
+    public void resultado() {
+        mensajeParaServidor = numeros1 + "," + numeros2 + "," + operacion;
+        System.out.println(mensajeParaServidor);
+        String respuesta=cliente.ejecutar(mensajeParaServidor);
+        jLabel2.setText(respuesta.trim());
+        numeros1=respuesta.trim();        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
