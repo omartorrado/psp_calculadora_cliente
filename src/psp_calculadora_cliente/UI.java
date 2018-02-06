@@ -13,14 +13,16 @@ import javax.swing.JLabel;
  */
 public class UI extends javax.swing.JFrame {
 
-    String stringNumeros = "";
+    String stringTemp = "";
     String numeros1 = "";
     String numeros2 = "";
-    String operacion = "";
+    String operador = "";
+    String respuesta = "";
+    String operacionCompleta = "";
     String mensajeParaServidor = "";
 
     /*
-    estados: 0 primer numero, 1 segundo numero, 2 volver a operar sin darle a =
+    estados: 0 primer numero, 1 segundo numero, 2 acabas de escribir el operador
      */
     int estadoOperacion = 0;
 
@@ -45,7 +47,9 @@ public class UI extends javax.swing.JFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(50, 50), new java.awt.Dimension(50, 50), new java.awt.Dimension(50, 50));
+        jLabelPantallaTop = new javax.swing.JLabel();
+        jLabelPantallaPrincipal = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -60,23 +64,54 @@ public class UI extends javax.swing.JFrame {
         jButton9 = new javax.swing.JButton();
         jButtonSuma = new javax.swing.JButton();
         jButtonDivide = new javax.swing.JButton();
+        jButtonCE = new javax.swing.JButton();
+        jButtonC = new javax.swing.JButton();
+        jButtonPunto = new javax.swing.JButton();
+        jButtonIgual = new javax.swing.JButton();
+        jButtonMasMenos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setLayout(new java.awt.GridBagLayout());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 2;
+        jPanel1.add(filler1, gridBagConstraints);
 
-        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setPreferredSize(new java.awt.Dimension(400, 50));
+        jLabelPantallaTop.setText("jLabel1");
+        jLabelPantallaTop.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabelPantallaTop.setMaximumSize(new java.awt.Dimension(500, 50));
+        jLabelPantallaTop.setOpaque(true);
+        jLabelPantallaTop.setPreferredSize(new java.awt.Dimension(200, 50));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.gridheight = 2;
-        jPanel1.add(jLabel2, gridBagConstraints);
+        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        jPanel1.add(jLabelPantallaTop, gridBagConstraints);
 
+        jLabelPantallaPrincipal.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabelPantallaPrincipal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabelPantallaPrincipal.setText("label 2");
+        jLabelPantallaPrincipal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabelPantallaPrincipal.setMaximumSize(new java.awt.Dimension(500, 50));
+        jLabelPantallaPrincipal.setOpaque(true);
+        jLabelPantallaPrincipal.setPreferredSize(new java.awt.Dimension(200, 50));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 5, 0);
+        jPanel1.add(jLabelPantallaPrincipal, gridBagConstraints);
+
+        jButton1.setBackground(new java.awt.Color(255, 204, 204));
         jButton1.setText("1");
+        jButton1.setMaximumSize(new java.awt.Dimension(50, 50));
+        jButton1.setMinimumSize(new java.awt.Dimension(50, 50));
         jButton1.setPreferredSize(new java.awt.Dimension(50, 50));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,7 +123,10 @@ public class UI extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         jPanel1.add(jButton1, gridBagConstraints);
 
+        jButton2.setBackground(new java.awt.Color(255, 204, 204));
         jButton2.setText("2");
+        jButton2.setMaximumSize(new java.awt.Dimension(50, 50));
+        jButton2.setMinimumSize(new java.awt.Dimension(50, 50));
         jButton2.setPreferredSize(new java.awt.Dimension(50, 50));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,7 +138,10 @@ public class UI extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         jPanel1.add(jButton2, gridBagConstraints);
 
+        jButton3.setBackground(new java.awt.Color(255, 204, 204));
         jButton3.setText("3");
+        jButton3.setMaximumSize(new java.awt.Dimension(50, 50));
+        jButton3.setMinimumSize(new java.awt.Dimension(50, 50));
         jButton3.setPreferredSize(new java.awt.Dimension(50, 50));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,7 +153,10 @@ public class UI extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         jPanel1.add(jButton3, gridBagConstraints);
 
+        jButton7.setBackground(new java.awt.Color(255, 204, 204));
         jButton7.setText("7");
+        jButton7.setMaximumSize(new java.awt.Dimension(50, 50));
+        jButton7.setMinimumSize(new java.awt.Dimension(50, 50));
         jButton7.setPreferredSize(new java.awt.Dimension(50, 50));
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,9 +168,10 @@ public class UI extends javax.swing.JFrame {
         gridBagConstraints.gridy = 4;
         jPanel1.add(jButton7, gridBagConstraints);
 
+        jButton0.setBackground(new java.awt.Color(255, 204, 204));
         jButton0.setText("0");
-        jButton0.setMaximumSize(new java.awt.Dimension(94, 25));
-        jButton0.setMinimumSize(new java.awt.Dimension(94, 25));
+        jButton0.setMaximumSize(new java.awt.Dimension(50, 50));
+        jButton0.setMinimumSize(new java.awt.Dimension(50, 50));
         jButton0.setPreferredSize(new java.awt.Dimension(50, 50));
         jButton0.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,7 +183,10 @@ public class UI extends javax.swing.JFrame {
         gridBagConstraints.gridy = 5;
         jPanel1.add(jButton0, gridBagConstraints);
 
+        jButton4.setBackground(new java.awt.Color(255, 204, 204));
         jButton4.setText("4");
+        jButton4.setMaximumSize(new java.awt.Dimension(50, 50));
+        jButton4.setMinimumSize(new java.awt.Dimension(50, 50));
         jButton4.setPreferredSize(new java.awt.Dimension(50, 50));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,7 +198,10 @@ public class UI extends javax.swing.JFrame {
         gridBagConstraints.gridy = 3;
         jPanel1.add(jButton4, gridBagConstraints);
 
+        jButton5.setBackground(new java.awt.Color(255, 204, 204));
         jButton5.setText("5");
+        jButton5.setMaximumSize(new java.awt.Dimension(50, 50));
+        jButton5.setMinimumSize(new java.awt.Dimension(50, 50));
         jButton5.setPreferredSize(new java.awt.Dimension(50, 50));
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,7 +213,10 @@ public class UI extends javax.swing.JFrame {
         gridBagConstraints.gridy = 3;
         jPanel1.add(jButton5, gridBagConstraints);
 
+        jButton6.setBackground(new java.awt.Color(255, 204, 204));
         jButton6.setText("6");
+        jButton6.setMaximumSize(new java.awt.Dimension(50, 50));
+        jButton6.setMinimumSize(new java.awt.Dimension(50, 50));
         jButton6.setPreferredSize(new java.awt.Dimension(50, 50));
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,7 +228,10 @@ public class UI extends javax.swing.JFrame {
         gridBagConstraints.gridy = 3;
         jPanel1.add(jButton6, gridBagConstraints);
 
+        jButtonMultiplica.setBackground(new java.awt.Color(255, 204, 204));
         jButtonMultiplica.setText("X");
+        jButtonMultiplica.setMaximumSize(new java.awt.Dimension(50, 50));
+        jButtonMultiplica.setMinimumSize(new java.awt.Dimension(50, 50));
         jButtonMultiplica.setPreferredSize(new java.awt.Dimension(50, 50));
         jButtonMultiplica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,9 +243,10 @@ public class UI extends javax.swing.JFrame {
         gridBagConstraints.gridy = 4;
         jPanel1.add(jButtonMultiplica, gridBagConstraints);
 
+        jButtonResta.setBackground(new java.awt.Color(255, 204, 204));
         jButtonResta.setText("-");
-        jButtonResta.setMaximumSize(new java.awt.Dimension(94, 25));
-        jButtonResta.setMinimumSize(new java.awt.Dimension(94, 25));
+        jButtonResta.setMaximumSize(new java.awt.Dimension(50, 50));
+        jButtonResta.setMinimumSize(new java.awt.Dimension(50, 50));
         jButtonResta.setPreferredSize(new java.awt.Dimension(50, 50));
         jButtonResta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -200,7 +258,10 @@ public class UI extends javax.swing.JFrame {
         gridBagConstraints.gridy = 3;
         jPanel1.add(jButtonResta, gridBagConstraints);
 
+        jButton8.setBackground(new java.awt.Color(255, 204, 204));
         jButton8.setText("8");
+        jButton8.setMaximumSize(new java.awt.Dimension(50, 50));
+        jButton8.setMinimumSize(new java.awt.Dimension(50, 50));
         jButton8.setPreferredSize(new java.awt.Dimension(50, 50));
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -212,7 +273,10 @@ public class UI extends javax.swing.JFrame {
         gridBagConstraints.gridy = 4;
         jPanel1.add(jButton8, gridBagConstraints);
 
+        jButton9.setBackground(new java.awt.Color(255, 204, 204));
         jButton9.setText("9");
+        jButton9.setMaximumSize(new java.awt.Dimension(50, 50));
+        jButton9.setMinimumSize(new java.awt.Dimension(50, 50));
         jButton9.setPreferredSize(new java.awt.Dimension(50, 50));
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -224,7 +288,10 @@ public class UI extends javax.swing.JFrame {
         gridBagConstraints.gridy = 4;
         jPanel1.add(jButton9, gridBagConstraints);
 
+        jButtonSuma.setBackground(new java.awt.Color(255, 204, 204));
         jButtonSuma.setText("+");
+        jButtonSuma.setMaximumSize(new java.awt.Dimension(50, 50));
+        jButtonSuma.setMinimumSize(new java.awt.Dimension(50, 50));
         jButtonSuma.setPreferredSize(new java.awt.Dimension(50, 50));
         jButtonSuma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,9 +303,10 @@ public class UI extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         jPanel1.add(jButtonSuma, gridBagConstraints);
 
+        jButtonDivide.setBackground(new java.awt.Color(255, 204, 204));
         jButtonDivide.setText("/");
-        jButtonDivide.setMaximumSize(new java.awt.Dimension(94, 25));
-        jButtonDivide.setMinimumSize(new java.awt.Dimension(94, 25));
+        jButtonDivide.setMaximumSize(new java.awt.Dimension(50, 50));
+        jButtonDivide.setMinimumSize(new java.awt.Dimension(50, 50));
         jButtonDivide.setPreferredSize(new java.awt.Dimension(50, 50));
         jButtonDivide.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -250,15 +318,90 @@ public class UI extends javax.swing.JFrame {
         gridBagConstraints.gridy = 5;
         jPanel1.add(jButtonDivide, gridBagConstraints);
 
+        jButtonCE.setBackground(new java.awt.Color(255, 204, 204));
+        jButtonCE.setText("CE");
+        jButtonCE.setMaximumSize(new java.awt.Dimension(50, 50));
+        jButtonCE.setMinimumSize(new java.awt.Dimension(50, 50));
+        jButtonCE.setPreferredSize(new java.awt.Dimension(50, 50));
+        jButtonCE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCEActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 2;
+        jPanel1.add(jButtonCE, gridBagConstraints);
+
+        jButtonC.setBackground(new java.awt.Color(255, 204, 204));
+        jButtonC.setText("C");
+        jButtonC.setMaximumSize(new java.awt.Dimension(50, 50));
+        jButtonC.setMinimumSize(new java.awt.Dimension(50, 50));
+        jButtonC.setPreferredSize(new java.awt.Dimension(50, 50));
+        jButtonC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 3;
+        jPanel1.add(jButtonC, gridBagConstraints);
+
+        jButtonPunto.setBackground(new java.awt.Color(255, 204, 204));
+        jButtonPunto.setText(".");
+        jButtonPunto.setMaximumSize(new java.awt.Dimension(50, 50));
+        jButtonPunto.setMinimumSize(new java.awt.Dimension(50, 50));
+        jButtonPunto.setPreferredSize(new java.awt.Dimension(50, 50));
+        jButtonPunto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPuntoActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 5;
+        jPanel1.add(jButtonPunto, gridBagConstraints);
+
+        jButtonIgual.setBackground(new java.awt.Color(255, 204, 204));
+        jButtonIgual.setText("=");
+        jButtonIgual.setMaximumSize(new java.awt.Dimension(50, 50));
+        jButtonIgual.setMinimumSize(new java.awt.Dimension(50, 50));
+        jButtonIgual.setPreferredSize(new java.awt.Dimension(50, 50));
+        jButtonIgual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonIgualActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 5;
+        jPanel1.add(jButtonIgual, gridBagConstraints);
+
+        jButtonMasMenos.setBackground(new java.awt.Color(255, 204, 204));
+        jButtonMasMenos.setText("+/-");
+        jButtonMasMenos.setMaximumSize(new java.awt.Dimension(50, 50));
+        jButtonMasMenos.setMinimumSize(new java.awt.Dimension(50, 50));
+        jButtonMasMenos.setPreferredSize(new java.awt.Dimension(50, 50));
+        jButtonMasMenos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMasMenosActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 4;
+        jPanel1.add(jButtonMasMenos, gridBagConstraints);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
         );
 
         pack();
@@ -305,20 +448,40 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton0ActionPerformed
 
     private void jButtonSumaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSumaActionPerformed
-        operacion("suma");
+        operacion("+");
     }//GEN-LAST:event_jButtonSumaActionPerformed
 
     private void jButtonRestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRestaActionPerformed
-        operacion("resta");
+        operacion("-");
     }//GEN-LAST:event_jButtonRestaActionPerformed
 
     private void jButtonMultiplicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMultiplicaActionPerformed
-        operacion("multip");
+        operacion("*");
     }//GEN-LAST:event_jButtonMultiplicaActionPerformed
 
     private void jButtonDivideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDivideActionPerformed
-        operacion("division");
+        operacion("/");
     }//GEN-LAST:event_jButtonDivideActionPerformed
+
+    private void jButtonCEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCEActionPerformed
+        borrarTodo();
+    }//GEN-LAST:event_jButtonCEActionPerformed
+
+    private void jButtonCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCActionPerformed
+        borrarNumeroActual();
+    }//GEN-LAST:event_jButtonCActionPerformed
+
+    private void jButtonPuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPuntoActionPerformed
+        escribirPuntoDecimal();
+    }//GEN-LAST:event_jButtonPuntoActionPerformed
+
+    private void jButtonIgualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIgualActionPerformed
+        resultado();
+    }//GEN-LAST:event_jButtonIgualActionPerformed
+
+    private void jButtonMasMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMasMenosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonMasMenosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -356,13 +519,29 @@ public class UI extends javax.swing.JFrame {
     }
 
     public void escribirNumero(int numero) {
-        if(estadoOperacion==2){
-            estadoOperacion=1;
+        //si lo anterior fue un operador, pasamos a escribir el segundo numero
+        if (estadoOperacion == 2) {
+            estadoOperacion = 1;
+            jLabelPantallaTop.setText(numeros1);
         }
+        //En la string temporal vamos a ir guardando los numeros que se meten seguidos, hasta que le damos a operar o al igual
+        stringTemp = stringTemp + numero;
+        jLabelPantallaPrincipal.setText(stringTemp);
+    }
 
-        stringNumeros = stringNumeros + numero;
-
-        jLabel2.setText(stringNumeros);
+    public void escribirPuntoDecimal() {
+        /*
+        Si ya hay un punto no hacemos nada
+        Si esta vacia ponemos 0.
+        Si ya hay numeros añadimos el punto
+         */
+        if (stringTemp.contains(".")) {
+            //no hace nada
+        } else if (stringTemp.isEmpty()) {
+            stringTemp = "0.";
+        } else {
+            stringTemp = stringTemp + ".";
+        }
     }
 
     public void operacion(String op) {
@@ -370,32 +549,73 @@ public class UI extends javax.swing.JFrame {
         - Comprobar que hemos escrito algun numero
         - Comprobar si ya hemos operado
          */
-        if (estadoOperacion == 0) {
-            numeros1 = stringNumeros;
-            stringNumeros = "";
+        //Antes e nada comprobamos que si hemos puesto el punto decimal lo siga algun numero, y sino lo quitamos
+        if (stringTemp.endsWith(".")) {
+            stringTemp = stringTemp.substring(0, stringTemp.length());
+            System.out.println("Si acaba en punto imprimimos: " + stringTemp);
+        }
+
+        if (estadoOperacion == 0 && !stringTemp.isEmpty()) {
+            numeros1 = stringTemp;
+            System.out.println("Primer numero: "+numeros1);
+            stringTemp = "";
             estadoOperacion = 2;
-            operacion = op;
-        } else if (estadoOperacion == 1) {
-            numeros2 = stringNumeros;
-            stringNumeros = "";
-            estadoOperacion = 2;
+            operador = op;
+        } else if (estadoOperacion == 1 && !stringTemp.isEmpty()) {
             resultado();
-            operacion = op;
+            operador = op;
         }
         if (estadoOperacion == 2) {
-            operacion = op;
+            operador = op;            
+            jLabelPantallaTop.setText(numeros1+operador);
         }
+
     }
 
     public void resultado() {
-        mensajeParaServidor = numeros1 + "," + numeros2 + "," + operacion;
-        System.out.println(mensajeParaServidor);
-        String respuesta=cliente.ejecutar(mensajeParaServidor);
-        jLabel2.setText(respuesta.trim());
-        numeros1=respuesta.trim();        
+        if (estadoOperacion != 2) {
+            numeros2 = stringTemp;
+            System.out.println("Segundo numero: "+numeros2);
+            mensajeParaServidor = numeros1 + "," + numeros2 + "," + operador;
+            System.out.println("Mensaje:"+mensajeParaServidor);
+            String mensaje = cliente.ejecutar(mensajeParaServidor);
+            jLabelPantallaTop.setText(numeros1 + operador + numeros2 + "=");
+            jLabelPantallaPrincipal.setText(mensaje.trim());
+            respuesta = mensaje.trim();
+            numeros1 = respuesta;
+            stringTemp = "";
+            numeros2 = "";
+            operador = "";
+            estadoOperacion = 2;
+        }
+    }
+
+    public void borrarTodo() {
+        numeros1 = "";
+        numeros2 = "";
+        operador = "";
+        stringTemp = "";
+        respuesta = "";
+        operacionCompleta = "";
+        mensajeParaServidor = "";
+        //devolvemos el estado al inicial
+        estadoOperacion = 0;
+        //borramos las etiquetas de texto
+        jLabelPantallaPrincipal.setText("");
+        jLabelPantallaTop.setText("");
+    }
+
+    public void borrarNumeroActual() {
+        stringTemp = "";
+        jLabelPantallaPrincipal.setText("");
+        //Si estabamos escribiendo el segundo numero, volvemos al estado de operador tras borrar el numero
+        if (estadoOperacion == 1) {
+            estadoOperacion = 2;
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.Box.Filler filler1;
     private javax.swing.JButton jButton0;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -406,11 +626,17 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JButton jButtonC;
+    private javax.swing.JButton jButtonCE;
     private javax.swing.JButton jButtonDivide;
+    private javax.swing.JButton jButtonIgual;
+    private javax.swing.JButton jButtonMasMenos;
     private javax.swing.JButton jButtonMultiplica;
+    private javax.swing.JButton jButtonPunto;
     private javax.swing.JButton jButtonResta;
     private javax.swing.JButton jButtonSuma;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelPantallaPrincipal;
+    private javax.swing.JLabel jLabelPantallaTop;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
