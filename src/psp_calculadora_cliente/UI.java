@@ -573,7 +573,7 @@ public class UI extends javax.swing.JFrame {
     }
 
     public void resultado() {
-        if (estadoOperacion != 2) {
+        if (estadoOperacion ==1) {
             numeros2 = stringTemp;
             System.out.println("Segundo numero: "+numeros2);
             mensajeParaServidor = numeros1 + "," + numeros2 + "," + operador;
